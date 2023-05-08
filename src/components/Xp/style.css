@@ -1,0 +1,28 @@
+.xp {
+    font-size: 30px;
+}
+
+.xp span {
+    font-size: 20px;
+    color: #ccc;
+}
+
+.xp-neutro {
+    color: #666;
+}
+.xp-negativo {
+    color: red;
+}
+
+.xp-positivo {
+    color: #1e4eff;
+}
+
+@media (min-width: 700px) {
+    .xp {
+        font-size: 40px;
+    }
+    .xp span {
+        font-size: 30px;
+    }
+}
