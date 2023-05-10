@@ -7,6 +7,7 @@ import Dashboard from './pages/Dashboard'
 import { Route, Routes, BrowserRouter, Navigate } from 'react-router-dom'
 import ProtectedRoutes from './pages/ProtectedRoutes'
 import { UserProvider } from './context/user'
+import Navbar from './pages/Navbar'
 
 function App() {
 
@@ -26,11 +27,6 @@ function App() {
           </Routes>
         </BrowserRouter>
       </UserProvider>
-
-
-      {/* <Login />
-      <Game />
-      <Dashboard /> */}
     </>
   )
 }

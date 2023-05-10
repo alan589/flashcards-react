@@ -9,7 +9,7 @@
 }
 
 .login-wrapper {
-    background-color: #79aefa;
+    background-color: #fff;
     padding: 50px;
     border-radius: 8px;
     display: flex;
@@ -24,7 +24,6 @@
 .input-wrapper {
     margin-bottom: 10px;
 }
-
 
 .btn {
     margin-right: 10px;

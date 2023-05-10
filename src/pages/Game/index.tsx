@@ -1,55 +1,26 @@
 import './style.css'
 import Card from '../../components/Card'
+import { useContext, useEffect, useState } from 'react'
 import Xp from '../../components/Xp'
-import { useState } from 'react'
+import { UserContext } from '../../context/user'
+import { Link } from 'react-router-dom'
+import Navbar from '../Navbar'
+import { signOut } from 'firebase/auth'
 
 const Game = () => {
 
-    const [cards, setCards] = useState([
-        {
-            front: "Gato",
-            back: "Cat"
-        },
-        {
-            front: "Vaca",
-            back: "Cow"
-        },
-        {
-            front: "Cachorro",
-            back: "Dog"
-        },
-        {
-            front: "Gato",
-            back: "Cat"
-        },
-        {
-            front: "Vaca",
-            back: "Cow"
-        },
-        {
-            front: "Cachorro",
-            back: "Dog"
-        },
-        {
-            front: "Gato",
-            back: "Cat"
-        },
-        {
-            front: "Vaca",
-            back: "Cow"
-        },
-        {
-            front: "Cachorro",
-            back: "Dog"
-        }
-    ])
+    const { cards, signOut } = useContext(UserContext)
 
     return (
         <>
-            <div id="container-topo">
-                <div className='titulo'>FlashCard Challenge</div>
-                <Xp/>
-            </div>
+            <nav id="container-topo">
+            <   span className='titulo'>FlashCard Challenge</span>
+                <ul>
+                    <li><Link to="/dashboard">Dashboard</Link></li>
+                    <li><Link to="/login" onClick={() => signOut()}>Logout</Link></li>
+                    <li><Xp></Xp></li>
+                </ul>
+             </nav>
             <div id="container-cards">
                 {cards.map((card => <Card content={card} />))}
             </div>

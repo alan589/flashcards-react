@@ -1,5 +1,61 @@
+@import 'https://fonts.googleapis.com/css?family=Lily+Script+One';
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+
+body {
+    background: #eee;
+    font-family: 'Lily Script One';
+}
+
+
+#container-topo {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: #03446a;
+    padding: 15px 20px;
+    z-index: 1;
+}
+
+#container-topo .titulo {
+    font-size: 20px;
+    color: #ccc;
+}
+
+nav ul li {
+    font-size: 12px;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    align-items: center;
+    gap: 20px;
+}
+  
+nav a {
+    text-decoration: none;
+    color: #ccc;
+}
+
+@media (min-width: 700px) {
+    #container-topo .titulo {
+        font-size: 30px;
+    }
+
+    nav ul {
+        gap: 60px;
+    }
+    nav ul li {
+        font-size: 18px;
+    }
 }

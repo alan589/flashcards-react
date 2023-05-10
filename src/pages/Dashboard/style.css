@@ -1,0 +1,26 @@
+.container-dashboard {
+    margin-top: 100px;
+    display: grid;
+    gap: 20px;
+    grid-template-areas: 'A B'
+                         'C B';
+}
+
+.container-dashboard > div {
+    background-color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    padding: 20px 0;
+    font-size: 30px;
+}
+
+.jogar {
+    grid-area: A;
+}
+
+.ranking {
+    grid-area: B;
+}
+
+.cards{
+    grid-area: C;
+}

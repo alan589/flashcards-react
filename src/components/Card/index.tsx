@@ -1,11 +1,25 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import './style.css'
 import { UserContext } from '../../context/user'
+import { doc, getFirestore, updateDoc } from 'firebase/firestore'
+import firebaseApp from '../../services/firebase'
 
-export default function Card({ content }) {
+export default function Card({content }) {
 
+    const db = getFirestore(firebaseApp)
     const [isOpened, setIsOpened] = useState(false)
-    const { handleXp } = useContext(UserContext)
+
+    const { handleXp, totalXp, user } = useContext(UserContext)
+    
+    useEffect(() => {
+        const atualizarXpDB = async () => {
+            const usuarioRef = doc(db, "usuarios", user.email);
+            await updateDoc(usuarioRef, {xp:totalXp});
+        }
+
+        atualizarXpDB()
+    }, [totalXp])
+
     return (
         <div
             className={isOpened ? "card card-opened" : "card"}
@@ -24,14 +38,14 @@ export default function Card({ content }) {
                     <div className='resposta-wrapper'>
                         <div>{content.back}</div>
                         <div className='resposta'>
-                                <span>Lembrou?</span>
+                                <span>Acertou?</span>
                                 <span>
                                     <span className='resposta-sim' onClick={() => {
-                                        handleXp(10);
+                                        handleXp(totalXp + 10)
                                         alert('Você ganhou 10 de xp')
-                                        }}>sim</span>
+                                    }}>sim</span>
                                     <span className='resposta-nao' onClick={() => {
-                                        handleXp(-20);
+                                        handleXp(totalXp - 20)
                                         alert('Você perdeu 20 xp')
                                         }}>não</span>
                                 </span>

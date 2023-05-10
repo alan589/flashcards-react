@@ -5,20 +5,6 @@
 * Browsers: last 4 version
 */
 
-@import 'https://fonts.googleapis.com/css?family=Lily+Script+One';
-
-body {
-    background: #eee;
-    font-family: 'Lily Script One';
-}
-
-/*
-* Prefixed by https://autoprefixer.github.io
-* PostCSS: v8.4.14,
-* Autoprefixer: v10.4.7
-* Browsers: last 4 version
-*/
-
 .card {
     position: relative;
     width: 300px;

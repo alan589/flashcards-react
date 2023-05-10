@@ -1,30 +1,9 @@
-#container-topo {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: fixed;
-    left: 0;
-    top: 0;
-    background-color: #03446a;
-    padding: 0 20px;
-    z-index: 1;
-}
-
-#container-topo .titulo {
-    font-size: 20px;
-    color: #ccc;
-}
 
 #container-cards {
     margin-top: 100px;
 }
 
 @media (min-width: 700px) {
-    #container-topo .titulo {
-        font-size: 30px;
-    }
-
     #container-cards {
         display: flex; 
         flex-wrap: wrap;  

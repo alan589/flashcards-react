@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react"
-
+import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
 import {
     getAuth,
     onAuthStateChanged,
@@ -7,6 +7,7 @@ import {
     signInWithEmailAndPassword,
     signOut as signOutFirebase,
 } from 'firebase/auth';
+import firebaseApp from "../services/firebase";
 
 const UserContext = createContext({})
 
@@ -16,57 +17,61 @@ const UserProvider = ({ children }) => {
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
     const [totalXp, setTotalXp] = useState(0)
+    const [cards, setCards] = useState<any>([])
 
+    const db = getFirestore(firebaseApp)
+
+    
     useEffect(() => {
         return onAuthStateChanged(auth, listenAuth)
     }, [])
 
     const listenAuth = (userState: any) => {
-        console.log('listenAuth', userState)
+        // console.log('listenAuth', userState)
         setUser(auth.currentUser)
+        // console.log('auth.currentUser', auth.currentUser)
         setLoading(false)
+        
     }
 
-
-
     const signIn = (email: string, password: string) => {
-        console.log('xxx', email, password)
         setLoading(true)
+        
         signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
-
-
-        }).catch((error) => {
-            console.log('error', error)
-            alert('Usuário não encontrado. Vire membro clicando no botão "Virar membro"')
-            setLoading(false)
-        })
+            }).catch((error) => {
+                console.log('error', error)
+                alert('Usuário não encontrado. Vire membro clicando no botão "Virar membro"')
+                setLoading(false)
+            })
 
     }
 
     const signOut = (email: string, password: string) => {
-        console.log('xxx', email, password)
         setLoading(true)
+
         signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
-
-
-        }).catch((error) => {
-            console.log('error', error)
-            setLoading(false)
-        })
-
+            }).catch((error) => {
+                console.log('error', error)
+                setLoading(false)
+            })
+    
         signOutFirebase(auth)
+
+
+
 
     }
 
     const signUp = (email: string, password: string) => {
-        console.log('xxx', email, password)
         setLoading(true)
 
         createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
+        .then(async (userCredential) => {
             // Signed in 
             // const user = userCredential.user;
             // ...
+            await setDoc(doc(db, "usuarios", email), {cards: [], xp: 0});
+
         })
         .catch((error) => {
             const errorCode = error.code;
@@ -82,7 +87,7 @@ const UserProvider = ({ children }) => {
                 alert('Erro ao criar a conta. Já existe uma conta com esse e-mail')
             }
             else {
-                alert('Erro ao criar a conta. Forneça um e-email correto')
+                alert('Erro ao criar a conta. Forneça um e-mail e senha correto')
             }
             setLoading(false)
             // ..
@@ -91,7 +96,10 @@ const UserProvider = ({ children }) => {
     }
 
     const handleXp = (xp) => {
-        setTotalXp(totalXp + xp)
+        setTotalXp(xp)
+    }
+    const handleCards = (cards) => {
+        setCards(cards)
     }
 
     return (
@@ -102,6 +110,8 @@ const UserProvider = ({ children }) => {
         user, 
         loading, 
         handleXp, 
+        handleCards,
+        cards,
         totalXp,
         }}>
             {children}
