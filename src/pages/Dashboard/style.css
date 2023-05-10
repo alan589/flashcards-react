@@ -1,16 +1,40 @@
+h2 {
+    color: #03446a;
+}
+
 .container-dashboard {
     margin-top: 100px;
-    display: grid;
-    gap: 20px;
-    grid-template-areas: 'A B'
-                         'C B';
 }
 
 .container-dashboard > div {
-    background-color: rgba(255, 255, 255, 0.8);
     text-align: center;
-    padding: 20px 0;
-    font-size: 30px;
+    padding: 20px 50px;
+    font-size: 20px;
+}
+
+
+.jogar a {
+    color: #03446a; 
+    text-decoration: none;
+}
+
+.ranking div, .ranking ol span{
+    display: flex;
+    justify-content: space-between;
+}
+
+.header-tabela {
+    margin-bottom: 10px;
+    color: #03446a;
+    font-weight: 800;
+}
+
+.container-dashboard {
+    display: grid;
+    gap: 100px;
+    grid-template-areas: 'B'
+                         'A'
+                         'C';
 }
 
 .jogar {
@@ -23,4 +47,30 @@
 
 .cards{
     grid-area: C;
+}
+
+.cards div {
+    margin: 0 auto;
+    width: 300px;
+    height: 200px;
+    border-radius: 8px;
+}
+
+.cards div input {
+    display: block;
+    margin: 0 auto;
+    height: 50px;
+}
+
+.cards div button {
+    padding: 5px 20px;
+}
+
+@media (min-width: 700px) {
+    .container-dashboard {
+        display: grid;
+        gap: 20px;
+        grid-template-areas: 'A B'
+                             'C B';
+    }
 }

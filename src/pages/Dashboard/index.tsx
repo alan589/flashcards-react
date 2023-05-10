@@ -18,22 +18,19 @@ const Dashboard = () => {
     const [usuarios, setUsuarios] = useState([])
 
     useEffect(() => {
+
         const getUsuariosDB = async () => {
 
             const querySnapshot = await getDocs(collection(db, "usuarios"));
              querySnapshot.forEach((doc) => {
-             // doc.data() is never undefined for query doc snapshots
-            //  console.log(doc.id, doc.data());
+                // doc.data() is never undefined for query doc snapshots
+                // console.log(doc.id, doc.data());
+                usuarios.push({id: doc.id, xp: doc.data().xp})
 
-             const contaUsuario = {id: doc.id, dados: doc.data()}
-             usuarios.push(contaUsuario)
-
-             
             });
+            ordernarUsuariosPorXp()
         }
         getUsuariosDB()
-        console.log(usuarios)
-
     }, [])
 
     useEffect(() => {
@@ -69,12 +66,19 @@ const Dashboard = () => {
           alert('Flashcard adicionado!')
        
     }
+    
+    const ordernarUsuariosPorXp = () => {
+        usuarios.sort((usuario1, usuario2) => {
+            return usuario2.xp - usuario1.xp 
+        })    
+    }
 
     if (loading) {
         return <div className='container'>
             <span>carregando ...</span>
         </div>
     }
+
 
     return (
         <>
@@ -91,15 +95,27 @@ const Dashboard = () => {
 
                 <div className='jogar'><Link to="/game">JOGAR!</Link></div>
                 <div className='ranking'>
-                    <h2>Ranking</h2>
-                    {usuarios.map((u => <p>usuario: {u.id} xp: {u.dados.xp}</p>))}
+                    <h2>Top 10</h2>
+                        <div className='header-tabela'><span>Usuários</span><span>Xp</span></div>
+
+                        <ol>
+                        { 
+                         usuarios.slice(0,10).map(((u) => 
+                                    <span><li>{u.id.split('@')[0]} </li>
+                                    <span>{u.xp}</span></span>
+                                ))}
+                        </ol>
                 </div>
                 <div className='cards'>
-                    <input type="text" value={front} placeholder="front" onChange={(e) => { setFront(e.target.value) }} />
-                    <input type="text" value={back} placeholder="back" onChange={(e) => { setBack(e.target.value) }} />
-                    <button onClick={() => { 
-                        handleAdd() 
-                    }}>Adicionar</button>
+                    <div>
+                        <label htmlFor="front">Front</label>    
+                        <input id='front' type="text" value={front} onChange={(e) => { setFront(e.target.value) }} />
+                        <label htmlFor="back">Back</label>    
+                        <input id='back' type="text" value={back} onChange={(e) => { setBack(e.target.value) }} />
+                        <button onClick={() => { 
+                            handleAdd() 
+                        }}>Adicionar</button>
+                    </div>
                 </div>
             </div>
         
