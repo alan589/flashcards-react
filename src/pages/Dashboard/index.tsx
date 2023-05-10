@@ -63,6 +63,8 @@ const Dashboard = () => {
           }
           const usuarioRef = doc(db, "usuarios", user.email);
           await updateDoc(usuarioRef, usuario);
+          setBack('')
+          setFront('')
           alert('Flashcard adicionado!')
        
     }
@@ -114,7 +116,7 @@ const Dashboard = () => {
                         <input id='back' type="text" value={back} onChange={(e) => { setBack(e.target.value) }} />
                         <button onClick={() => { 
                             handleAdd() 
-                        }}>Adicionar</button>
+                        }}>Adicionar Card</button>
                     </div>
                 </div>
             </div>

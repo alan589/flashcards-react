@@ -16,6 +16,8 @@ h2 {
 .jogar a {
     color: #03446a; 
     text-decoration: none;
+    font-size: 50px;
+    font-weight: 800;
 }
 
 .ranking div, .ranking ol span{
@@ -64,6 +66,12 @@ h2 {
 
 .cards div button {
     padding: 5px 20px;
+    margin-top: 20px;
+    border: 0;
+    background-color: #03446a;
+    border-radius: 8px;
+    color: #ccc;
+    cursor: pointer;
 }
 
 @media (min-width: 700px) {
