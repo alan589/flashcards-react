@@ -4,7 +4,14 @@ import { UserContext } from '../../context/user'
 import { doc, getFirestore, updateDoc } from 'firebase/firestore'
 import firebaseApp from '../../services/firebase'
 
-export default function Card({content }) {
+interface Content {
+    front: string,
+    back: string
+}
+interface ICard {
+    content: Content
+}
+const Card : React.FC<ICard> = ({content }) => {
 
     const db = getFirestore(firebaseApp)
     const [isOpened, setIsOpened] = useState(false)
@@ -58,3 +65,6 @@ export default function Card({content }) {
         </div>
     )
 }
+
+
+export default Card

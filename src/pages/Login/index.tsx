@@ -2,7 +2,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import './style.css'
 import { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../../context/user'
-import Navbar from '../Navbar'
+
 
 const Login = () => {
 

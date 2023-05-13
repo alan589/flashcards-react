@@ -4,7 +4,6 @@ import { useContext, useEffect, useState } from 'react'
 import Xp from '../../components/Xp'
 import { UserContext } from '../../context/user'
 import { Link } from 'react-router-dom'
-import Navbar from '../Navbar'
 import { signOut } from 'firebase/auth'
 
 const Game = () => {
@@ -22,7 +21,7 @@ const Game = () => {
                 </ul>
              </nav>
             <div id="container-cards">
-                {cards.map((card => <Card content={card} />))}
+                {cards.map(((card:any) => <Card content={card} />))}
             </div>
         </>
     )

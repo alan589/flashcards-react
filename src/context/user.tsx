@@ -9,14 +9,30 @@ import {
 } from 'firebase/auth';
 import firebaseApp from "../services/firebase";
 
-const UserContext = createContext({})
 
-const UserProvider = ({ children }) => {
+interface IUserContext {
+        signIn : Function, 
+        signUp : Function, 
+        signOut : Function, 
+        user: any, 
+        loading : boolean, 
+        handleXp : Function, 
+        handleCards : Function,
+        cards: any,
+        totalXp: number,
+}
+const UserContext = createContext<IUserContext>({} as IUserContext)
+
+
+
+interface IUserProvider {
+    children : React.ReactNode
+}
+const UserProvider : React.FC<IUserProvider> = ({ children }) => {
     const auth = getAuth();
-    const [couldLogin, setCouldLogin] = useState(false)
-    const [user, setUser] = useState(null)
-    const [loading, setLoading] = useState(true)
-    const [totalXp, setTotalXp] = useState(0)
+    const [user, setUser] = useState<any>(null)
+    const [loading, setLoading] = useState<boolean>(true)
+    const [totalXp, setTotalXp] = useState<number>(0)
     const [cards, setCards] = useState<any>([])
 
     const db = getFirestore(firebaseApp)
@@ -95,15 +111,15 @@ const UserProvider = ({ children }) => {
 
     }
 
-    const handleXp = (xp) => {
+    const handleXp = (xp: any) => {
         setTotalXp(xp)
     }
-    const handleCards = (cards) => {
+    const handleCards = (cards: any) => {
         setCards(cards)
     }
 
     return (
-        <UserContext.Provider value={{ couldLogin, 
+        <UserContext.Provider value={{ 
         signIn, 
         signUp, 
         signOut, 

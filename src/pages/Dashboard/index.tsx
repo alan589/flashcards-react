@@ -8,6 +8,8 @@ import firebaseApp from '../../services/firebase'
 import { doc, getFirestore, addDoc, updateDoc, collection, getDocs, onSnapshot, query, setDoc, getDoc } from 'firebase/firestore'
 import Xp from '../../components/Xp'
 
+
+
 const Dashboard = () => {
     
     const db = getFirestore(firebaseApp)
@@ -15,7 +17,7 @@ const Dashboard = () => {
     const { signOut, user, loading, totalXp, handleXp, handleCards, cards } = useContext(UserContext)
     const [front, setFront] = useState('')
     const [back, setBack] = useState('')
-    const [usuarios, setUsuarios] = useState([])
+    const [usuarios, setUsuarios] = useState<any>([])
 
     useEffect(() => {
 
@@ -25,7 +27,9 @@ const Dashboard = () => {
              querySnapshot.forEach((doc) => {
                 // doc.data() is never undefined for query doc snapshots
                 // console.log(doc.id, doc.data());
-                usuarios.push({id: doc.id, xp: doc.data().xp})
+                const id = doc.id;
+                const xp = doc.data().xp
+                usuarios.push({id: id, xp: xp})
 
             });
             ordernarUsuariosPorXp()
@@ -70,7 +74,7 @@ const Dashboard = () => {
     }
     
     const ordernarUsuariosPorXp = () => {
-        usuarios.sort((usuario1, usuario2) => {
+        usuarios.sort((usuario1: any, usuario2: any) => {
             return usuario2.xp - usuario1.xp 
         })    
     }
@@ -102,7 +106,7 @@ const Dashboard = () => {
 
                         <ol>
                         { 
-                         usuarios.slice(0,10).map(((u) => 
+                         usuarios.slice(0,10).map(((u: any) => 
                                     <span><li>{u.id.split('@')[0]} </li>
                                     <span>{u.xp}</span></span>
                                 ))}
