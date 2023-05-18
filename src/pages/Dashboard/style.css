@@ -14,10 +14,16 @@ h2 {
 
 
 .jogar a {
-    color: #03446a; 
+    color: #ccc; 
     text-decoration: none;
-    font-size: 50px;
+    font-size: 25px;
     font-weight: 800;
+    background-color: #03446a;
+    padding: 10px 30px;
+    border-radius: 8px;
+}
+.jogar a:hover {
+    background-color: #045a8b;
 }
 
 .ranking div, .ranking ol span{
