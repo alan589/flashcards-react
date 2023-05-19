@@ -56,7 +56,7 @@ const UserProvider : React.FC<IUserProvider> = ({ children }) => {
         signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
             }).catch((error) => {
                 console.log('error', error)
-                alert('Usuário não encontrado. Vire membro clicando no botão "Virar membro"')
+                alert('Usuário não encontrado. Crie uma conta clicando em "Virar membro"')
                 setLoading(false)
             })
 
